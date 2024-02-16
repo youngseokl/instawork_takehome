@@ -1,0 +1,15 @@
+{% extends "member_base.html" %}
+
+{% block title %}
+    <h1>Add team member</h1>
+    <h4>Set email, location, and role</h4>
+{% endblock %}
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+      <table>
+          {{ form.as_table }}
+      </table>
+      <input type="submit" value="Save">
+      </form>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <form action="{% url 'add-member'%}">
+      {% csrf_token %}
+      <button type="submit" value="+">+</button>
+    </form>
+    <h1>Team members</h1>
+    <h4>You have {{num_members}} team members.</h4>
+  </head>
+  <body>
+    <ul>
+    {% for member in members %}
+    <li>
+      <form action="{% url 'edit-member' member.get_id%}">
+        <button type="submit">
+          <h2>
+            {% if member.status == 'a' %}
+              {{ member.first_name|add:" "|add:member.last_name|add:" (admin)" }}
+            {% else %}
+              {{ member.first_name|add:" "|add:member.last_name }}
+            {% endif %}
+          </h2>
+          <h2>
+            {{ member.phone_number }}
+          </h2>
+          <h2>
+            {{ member.email }}
+          </h2>
+        </button>
+      </form>
+    </li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
