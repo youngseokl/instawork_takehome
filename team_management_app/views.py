@@ -3,6 +3,8 @@ from .models import Member
 from .forms import MemberForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.db import IntegrityError
 
 def index(request):
     """This page lists all members who have been added (not including the deleted ones)."""
@@ -21,20 +23,23 @@ def AddMember(request):
     # Process form data
     if request.method == 'POST':
         form = MemberForm(request.POST)
+        if form.is_valid():
 
-        # Populating form data
-        member = Member(
-            first_name=form.data['first_name'], 
-            last_name=form.data['last_name'], 
-            phone_number=form.data['phone_number'], 
-            email=form.data['email'], 
-            status=form.data['status']
-        )
-        
-        member.save()
-
+            # Populating form data
+            member = Member(
+                first_name=form.data['first_name'], 
+                last_name=form.data['last_name'], 
+                phone_number=form.data['phone_number'], 
+                email=form.data['email'], 
+                role=form.data['role']
+            )
+            
+            try:
+                member.save()
+                return HttpResponseRedirect('/')
+            except IntegrityError:
+                messages.error(request, "Account with same email already exists")
         # Redirect to home page
-        return HttpResponseRedirect('/')
 
     # Loads empty form
     else:
@@ -59,7 +64,7 @@ def EditMember(request, pk):
         member.last_name = form.data['last_name']
         member.phone_number = form.data['phone_number']
         member.email = form.data['email']
-        member.status = form.data['status']
+        member.role = form.data['role']
 
         member.save()
 
@@ -73,7 +78,7 @@ def EditMember(request, pk):
             'last_name': member.last_name,
             'phone_number': member.phone_number,
             'email': member.email,
-            'status': member.status
+            'role': member.role
             }
         )
 

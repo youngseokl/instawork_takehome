@@ -1,0 +1,13 @@
+[
+    {
+      "model": "team_management_app.member",
+      "pk": 0,
+      "fields": {
+        "first_name": "Instawork",
+        "last_name": "Admin",
+        "email": "admin@instawork.com",
+        "phone_number": "1234567890",
+        "role": "admin"
+      }
+    }
+]

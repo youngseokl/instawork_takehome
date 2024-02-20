@@ -5,6 +5,9 @@
             <h1>Edit team member</h1>
             <h4>Edit contact info, location and role</h4>
     {% endblock %}
+    {% for msg in messages %}
+      {{ msg }}
+    {% endfor %}
     </head>
     <body>
         {% block content %}

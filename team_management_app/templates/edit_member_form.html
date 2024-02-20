@@ -12,8 +12,10 @@
       </table>
       <input type="submit" value="Save">
     </form>
-    <form action="{% url 'delete-member' pk%}">
-        {% csrf_token %}
-        <button type="submit" value="delete">Delete</button>
-    </form>
+    {% if pk != 0 %}
+      <form action="{% url 'delete-member' pk%}">
+          {% csrf_token %}
+          <button type="submit" title="Remove this account" value="delete" onclick="return confirm('Are you sure?');">Delete</button>
+      </form>
+    {% endif %}
 {% endblock %}

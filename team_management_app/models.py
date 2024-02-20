@@ -9,14 +9,14 @@ class Member(models.Model):
     email = models.CharField(max_length=200, unique=True)
     phone_number = models.CharField(max_length=100)
     ROLE_TYPE = (
-        ('r', 'Regular'),
-        ('a', 'Admin')
+        ('regular', 'Regular'),
+        ('admin', 'Admin')
     )
-    status = models.CharField(
-        max_length=1,
+    role = models.CharField(
+        max_length=20,
         choices=ROLE_TYPE,
         blank=True,
-        default='r',
+        default='regular',
         help_text='Role of this team member',
     )
 
