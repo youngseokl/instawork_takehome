@@ -64,8 +64,11 @@ def EditMember(request, pk):
         member.last_name = form.data['last_name']
         member.phone_number = form.data['phone_number']
         member.email = form.data['email']
-        member.role = form.data['role']
-
+        if (pk != 0):
+            member.role = form.data['role']
+        else:
+            if form.data['role'] == 'regular':
+                 messages.error(request, "Cannot change role of this root user to Regular")
         member.save()
 
         # Redirect to home page

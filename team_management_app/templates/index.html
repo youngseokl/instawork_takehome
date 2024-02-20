@@ -7,6 +7,9 @@
     </form>
     <h1>Team members</h1>
     <h4>You have {{num_members}} team members.</h4>
+    {% for msg in messages %}
+      {{ msg }}
+    {% endfor %}
   </head>
   <body>
     <ul>
