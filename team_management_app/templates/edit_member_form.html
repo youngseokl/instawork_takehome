@@ -10,9 +10,9 @@
       <table>
           {{ form.as_table }}
       </table>
-      <input type="submit" value="Save">
     </form>
     {% if pk != 0 %}
+    <input type="submit" value="Save">
       <form action="{% url 'delete-member' pk%}">
           {% csrf_token %}
           <button type="submit" title="Remove this account" value="delete" onclick="return confirm('Are you sure?');">Delete</button>
